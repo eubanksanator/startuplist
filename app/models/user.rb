@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :comments
 	has_many :questions
+  has_one :profile
   acts_as_voter
 
 

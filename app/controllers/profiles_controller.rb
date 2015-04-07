@@ -13,6 +13,7 @@ class ProfilesController < ApplicationController
   end
 
   def create
+    @profile = Profile.create(profile_params)
   end
 
 
