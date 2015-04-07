@@ -4,16 +4,24 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @profile = Profile.find(params[:id])
   end
 
   def new
+    @profile = Profile.new
   end
 
   def edit
   end
 
   def create
-    @profile = Profile.create(profile_params)
+    @profile = Profile.new(profile_params)
+    @profile.user_id = current_user.id
+
+    if @profile.save
+      redirect_to @profile notice: "Profile created Successfully"
+    else
+      redirect_to new_profile_path
   end
 
 
@@ -27,7 +35,7 @@ class ProfilesController < ApplicationController
     def profile_params
       params.require(:profile).permit(:picture, :bio, :email,
                                       :twitter, :website, :github,
-                                      :dribble, :public, :portfolio,)
+                                      :dribble, :public, :portfolio, :user_id)
 
     end
 end
