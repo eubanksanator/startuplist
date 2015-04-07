@@ -8,7 +8,8 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profile = Profile.new
+    @user = User.find(params[:id])
+    @profile = @user.build_profile
   end
 
   def edit
