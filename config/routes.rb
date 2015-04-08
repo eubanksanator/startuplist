@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  get 'profiles/new'
-
-  get 'profiles/create'
-
-  get 'profiles/edit'
-
-  get 'profiles/update'
-
-  get 'profiles/destroy'
-
   resources :ideas
 
    resources :ideas do
@@ -22,11 +12,11 @@ end
 
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-
+  
 
   resources :users
 
-  resources :questions do
+  resources :questions do 
     resources :comments
   end
 
@@ -51,8 +41,6 @@ end
   resources :spaces
 
   resources :posts
-
-  resources :profiles
 
 
   get "search" => "search#index"
