@@ -4,12 +4,13 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find(params[:id])
+    @profile = current_user.profile
   end
 
   def new
-    @user = User.find(params[:id])
-    @profile = @user.build_profile
+    @profile = Profile.new
+    # @user = current_user #User.find(params[:id])
+    # @profile = @user.build_profile
   end
 
   def edit
@@ -20,9 +21,10 @@ class ProfilesController < ApplicationController
     @profile.user_id = current_user.id
 
     if @profile.save
-      redirect_to @profile notice: "Profile created Successfully"
+      redirect_to @profile, notice: "Profile created Successfully"
     else
-      redirect_to new_profile_path
+      redirect_to new_profile_path, notice: "Sorry, the profile did not save"
+    end
   end
 
 
