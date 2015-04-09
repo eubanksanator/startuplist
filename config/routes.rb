@@ -12,11 +12,11 @@ end
 
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-  
+
 
   resources :users
 
-  resources :questions do 
+  resources :questions do
     resources :comments
   end
 
@@ -41,6 +41,8 @@ end
   resources :spaces
 
   resources :posts
+
+  resources :after_signup
 
 
   get "search" => "search#index"
