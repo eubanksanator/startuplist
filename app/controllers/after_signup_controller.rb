@@ -5,6 +5,5 @@ class AfterSignupController < ApplicationController
 
   def show
     @user = current_user
-    case step
   end
 end

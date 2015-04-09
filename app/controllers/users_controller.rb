@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to after_signup_path, notice: 'User was successfully created./n Lets create a profile!' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def finish_signup
-    # authorize! :update, @user 
+    # authorize! :update, @user
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
         @user.skip_reconfirmation!
