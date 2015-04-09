@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
-  after_create :build_profile
 
-  def build_profile
-    Profile.create('user_id' => :id) # Associations must be defined correctly for this syntax, avoids using ID's directly.
-  end
   # GET /users
   # GET /users.json
   def index
@@ -34,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to edit_profile_path(@user), notice: 'User was successfully created./n Lets create a profile!' }
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -59,12 +55,12 @@ class UsersController < ApplicationController
   end
 
   def finish_signup
-    # authorize! :update, @user
+    # authorize! :update, @user 
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
         @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to edit_profile_path(@user), notice: 'Your profile was successfully updated.'
+        redirect_to @user, notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
       end
