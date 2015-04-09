@@ -21,6 +21,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource)
     if resource.email_verified?
+      new_create_profile_path
       super resource
     else
       root_url

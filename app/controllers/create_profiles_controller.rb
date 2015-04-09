@@ -1,5 +1,5 @@
 class CreateProfilesController <Wicked::WizardController
-before_filter: authenticate_user!
+# before_filter: authenticate_user!
 
 steps :user_profile
 
