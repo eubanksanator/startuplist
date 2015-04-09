@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'profile/index'
+
+  get 'profile/show'
+
+  get 'profile/edit'
+
+  get 'profile/create'
+
+  get 'profile/update'
+
+  get 'profile/destroy'
+
   resources :ideas
 
    resources :ideas do
@@ -42,7 +54,9 @@ end
 
   resources :posts
 
-  resources :after_signup
+  resources :profile
+
+  # resources :after_signup
 
 
   get "search" => "search#index"
